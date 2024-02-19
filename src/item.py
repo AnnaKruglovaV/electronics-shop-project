@@ -70,3 +70,9 @@ class Item:
     @staticmethod
     def string_to_number(name):
         return int(float(name))
+
+    def __repr__(self) -> str:
+        return f"{self.__class__.__name__}('{self.name}', {self.price}, {self.quantity})"
+
+    def __str__(self) -> str:
+        return f'{self.name}'
