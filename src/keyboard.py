@@ -9,11 +9,6 @@ class MixLog:
     def __str__(self):
         return self.language
 
-
-class Keyboard(MixLog, Item):
-    def __init__(self, name, price, quantity):
-        super().__init__(name, price, quantity)
-
     def change_lang(self):
         if self.language == "EN":
             self.language = "RU"
@@ -21,6 +16,11 @@ class Keyboard(MixLog, Item):
             self.language = "EN"
 
         return self
+
+
+class Keyboard(MixLog, Item):
+    def __init__(self, name, price, quantity):
+        super().__init__(name, price, quantity)
 
     def __str__(self):
         return self.name
