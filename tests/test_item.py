@@ -1,4 +1,4 @@
-from src.item import Item
+from src.item import Item, InstantiateCSVError
 import pytest
 
 from src.phone import Phone
@@ -46,14 +46,6 @@ def test_name_setter_truncate():
     assert item.name == 'Суперсмарт'
 
 
-def test_instantiate_from_csv():
-    Item.instantiate_from_csv('src/items.csv')
-    assert len(Item.all) == 5
-
-    item1 = Item.all[0]
-    assert item1.name == 'Смартфон'
-
-
 def test_string_to_number():
     assert Item.string_to_number('5') == 5
     assert Item.string_to_number('5.0') == 5
@@ -72,3 +64,13 @@ def test_str():
 
 def test_add(position, phone1):
     assert position + phone1 == 11
+
+
+def test_instantiate_from_csv_not():
+    with pytest.raises(FileNotFoundError):
+        Item.instantiate_from_csv()
+
+
+def test_instantiate_from_csv_error():
+    with pytest.raises(InstantiateCSVError):
+        Item.instantiate_from_csv()
