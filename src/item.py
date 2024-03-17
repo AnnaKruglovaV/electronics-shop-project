@@ -59,21 +59,18 @@ class Item:
             print(f'Длинное слово - {value[:10]}')
 
     @classmethod
-    def instantiate_from_csv(cls):
+    def instantiate_from_csv(cls, filepath='../src/items.csv'):
         try:
             cls.all = []
-            with open('../src/items.csv', newline='', encoding='cp1251') as csvfile:
+            with open(filepath, newline='', encoding='cp1251') as csvfile:
                 reader = csv.DictReader(csvfile)
                 for i in reader:
                     if 'name' not in i or 'price' not in i or 'quantity' not in i:
-                        raise InstantiateCSVError
+                        raise InstantiateCSVError('Файл {} поврежден'.format(filepath))
                     a = cls(i['name'], i['price'], i['quantity'])
 
         except FileNotFoundError:
-            print("Отсутствует файл item.csv")
-            raise
-        except InstantiateCSVError:
-            print('Файл items.csv поврежден')
+            print("Отсутствует файл {}".format(filepath))
             raise
 
     @staticmethod
