@@ -22,7 +22,7 @@ class Item:
         """
         self.__name = name
         self.price = price
-        self. quantity = quantity
+        self.quantity = quantity
         Item.all.append(self)
 
     def calculate_total_price(self) -> float:
@@ -66,12 +66,11 @@ class Item:
                 reader = csv.DictReader(csvfile)
                 for i in reader:
                     if 'name' not in i or 'price' not in i or 'quantity' not in i:
-                        raise InstantiateCSVError('Файл {} поврежден'.format(filepath))
+                        raise InstantiateCSVError(f'Файл {filepath} поврежден')
                     a = cls(i['name'], i['price'], i['quantity'])
 
         except FileNotFoundError:
-            print("Отсутствует файл {}".format(filepath))
-            raise
+            raise FileNotFoundError(f"Отсутствует файл {filepath}")
 
     @staticmethod
     def string_to_number(name):
