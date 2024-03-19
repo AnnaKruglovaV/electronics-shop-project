@@ -6,11 +6,17 @@ from src.phone import Phone
 
 @pytest.fixture
 def position():
+    """
+    Экземпляр класса в фикстуре
+    """
     return Item("Смартфон", 100, 1)
 
 
 @pytest.fixture
 def phone1():
+    """
+    Экземпляр класса в фикстуре
+    """
     return Phone("IPhone", 30000, 10, 2)
 
 
@@ -63,6 +69,9 @@ def test_str():
 
 
 def test_add(position, phone1):
+    """
+    Тест метода add
+    """
     assert position + phone1 == 11
 
 
